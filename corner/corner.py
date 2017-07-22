@@ -370,6 +370,8 @@ def corner(xs, bins=20, range=None, weights=None, color="k",
                 #           edgecolor='none', color='k', alpha=1.0)
                 ax.plot(x, y, markersize=1.0, marker='.', lw=0.0,
                            markeredgecolor='none', color='k', alpha=1.0)
+                ax.set_xlim(range[i])
+                ax.set_ylim(range[j])
                 # ax.axis('scaled')
                 # pl.plot(x, y, '.')
 
