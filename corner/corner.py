@@ -355,16 +355,22 @@ def corner(xs, bins=20, range=None, weights=None, color="k",
             if hasattr(y, "compressed"):
                 y = y.compressed()
 
+
+            if verbose:
+                print('minmax(x):', np.min(x), np.max(x), len(x))
+                print('minmax(y):', np.min(y), np.max(y), len(y))
+
             if not scatter:
                 hist2d(y, x, ax=ax, range=[range[j], range[i]], weights=weights,
                        color=color, smooth=smooth, bins=[bins[j], bins[i]],
                        **hist2d_kwargs)
 
             if scatter:
-                print('minmax:', np.min(x), np.min(y))
-                print('minmax:', np.max(x), np.max(y))
-                ax.scatter(x, y, s=1.0, marker='.', lw=0.0,
-                           edgecolor='none', color='k', alpha=1.0)
+                # ax.scatter(x, y, s=1.0, marker='.', lw=0.0,
+                #           edgecolor='none', color='k', alpha=1.0)
+                ax.plot(x, y, markersize=1.0, marker='.', lw=0.0,
+                           markeredgecolor='none', color='k', alpha=1.0)
+                # ax.axis('scaled')
                 # pl.plot(x, y, '.')
 
 
