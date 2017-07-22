@@ -4,7 +4,7 @@ from __future__ import print_function, absolute_import
 
 import logging
 import numpy as np
-import matplotlib.pyplot as pl
+import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator, NullLocator
 from matplotlib.colors import LinearSegmentedColormap, colorConverter
 from matplotlib.ticker import ScalarFormatter
@@ -213,7 +213,7 @@ def corner(xs, bins=20, range=None, weights=None, color="k",
 
     # Create a new figure if one wasn't provided.
     if fig is None:
-        fig, axes = pl.subplots(K, K, figsize=(dim, dim))
+        fig, axes = plt.subplots(K, K, figsize=(dim, dim))
     else:
         try:
             axes = np.array(fig.axes).reshape((K, K))
@@ -373,7 +373,7 @@ def corner(xs, bins=20, range=None, weights=None, color="k",
                 ax.set_xlim(range[i])
                 ax.set_ylim(range[j])
                 # ax.axis('scaled')
-                # pl.plot(x, y, '.')
+                # plt.plot(x, y, '.')
 
 
             if truths is not None:
@@ -535,7 +535,7 @@ def hist2d(x, y, bins=20, range=None, weights=None, levels=None, smooth=None,
 
     """
     if ax is None:
-        ax = pl.gca()
+        ax = plt.gca()
 
     # Set the default range based on the data range if not provided.
     if range is None:
