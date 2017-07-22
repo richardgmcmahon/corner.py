@@ -19,6 +19,7 @@ __all__ = ["corner", "hist2d", "quantile"]
 
 def corner(xs, bins=20, range=None, weights=None, color="k",
            smooth=None, smooth1d=None,
+           scatter=False,
            labels=None, label_kwargs=None,
            show_titles=False, title_fmt=".2f", title_kwargs=None,
            truths=None, truth_color="#4682b4",
@@ -105,11 +106,11 @@ def corner(xs, bins=20, range=None, weights=None, color="k",
     use_math_text : bool
         If true, then axis tick labels for very large or small exponents will
         be displayed as powers of 10 rather than using `e`.
-        
+
     reverse : bool
-        If true, plot the corner plot starting in the upper-right corner instead 
+        If true, plot the corner plot starting in the upper-right corner instead
         of the usual bottom-left corner
-        
+
     max_n_ticks: int
         Maximum number of ticks to try to use
 
@@ -354,9 +355,18 @@ def corner(xs, bins=20, range=None, weights=None, color="k",
             if hasattr(y, "compressed"):
                 y = y.compressed()
 
-            hist2d(y, x, ax=ax, range=[range[j], range[i]], weights=weights,
-                   color=color, smooth=smooth, bins=[bins[j], bins[i]],
-                   **hist2d_kwargs)
+            if not scatter:
+                hist2d(y, x, ax=ax, range=[range[j], range[i]], weights=weights,
+                       color=color, smooth=smooth, bins=[bins[j], bins[i]],
+                       **hist2d_kwargs)
+
+            if scatter:
+                print('minmax:', np.min(x), np.min(y))
+                print('minmax:', np.max(x), np.max(y))
+                ax.scatter(x, y, s=1.0, marker='.', lw=0.0,
+                           edgecolor='none', color='k', alpha=1.0)
+                # pl.plot(x, y, '.')
+
 
             if truths is not None:
                 if truths[i] is not None and truths[j] is not None:
